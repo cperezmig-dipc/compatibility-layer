@@ -159,7 +159,7 @@
     executable: /bin/bash
   changed_when: true
   environment:
-    STOP_BOOTSTRAP_AFTER: stage3
+    STOP_BOOTSTRAP_AFTER: stage1
   tags:
     - build_prefix
 
