@@ -159,7 +159,7 @@
     executable: /bin/bash
   changed_when: true
   environment:
-    STOP_BOOTSTRAP_AFTER: stage1
+    STOP_BOOTSTRAP_AFTER: stage3
   tags:
     - build_prefix
 
@@ -172,13 +172,13 @@
   tags:
     - build_prefix
 
-#- name: "Continue Gentoo Prefix bootstrap via {{ prefix_install }}"
-  #ansible.builtin.shell: set -o pipefail && ( {{ prefix_install }} | tee -a {{ prefix_build_log }} | grep -E '^(>>> Installing|\\* )' )
-  #args:
-    #executable: /bin/bash
-  #changed_when: true
-  #tags:
-    #- build_prefix
+- name: "Continue Gentoo Prefix bootstrap via {{ prefix_install }}"
+  ansible.builtin.shell: set -o pipefail && ( {{ prefix_install }} | tee -a {{ prefix_build_log }} | grep -E '^(>>> Installing|\\* )' )
+  args:
+    executable: /bin/bash
+  changed_when: true
+  tags:
+    - build_prefix
 
 - name: "Find files and directories in $EPREFIX/var/tmp"
   ansible.builtin.find:
@@ -200,9 +200,9 @@
   tags:
     - build_prefix
 
-#- name: "Fail if startprefix script has not been created"
-  #ansible.builtin.fail:
-    #msg: "The resulting Gentoo Prefix installation does not have a startprefix script. Something went wrong!"
-  #when: not startprefix.stat.exists
-  #tags:
-    #- build_prefix
+- name: "Fail if startprefix script has not been created"
+  ansible.builtin.fail:
+    msg: "The resulting Gentoo Prefix installation does not have a startprefix script. Something went wrong!"
+  when: not startprefix.stat.exists
+  tags:
+    - build_prefix
