@@ -68,7 +68,7 @@ cat << EOF > cfg/job.cfg
 [site_config]
 http_proxy=''
 https_proxy=''
-local_tmp=$HOME/tmp
+local_tmp=$(mktemp -d)
 load_modules=Apptainer
 
 [architecture]
