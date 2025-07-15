@@ -92,7 +92,7 @@ jq -n \
     --arg sz "$(du -b "${filename}" | awk '{print $1}')" \
     --arg ct "$(date -r "${filename}")" \
     --arg sha256 "$(sha256sum "${filename}" | awk '{print $1}')" \
-    --arg repo ${{ inputs.repository }} \
+    --arg repo ${REPOSITORY} \
     --arg path "versions" \
     '{
     uploader: {username: $un, ip: $ip, hostname: $hn},
